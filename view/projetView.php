@@ -30,18 +30,21 @@ ob_start();
             <i class="fas fa-eye"></i> Lectures : <?php echo htmlspecialchars($proj['projetVues']); ?>
           </p>
         </div>
-        <img class="img-fluid img-thumbnail float-left img-article" src="view/<?php echo htmlspecialchars($proj['projetImage']); ?>" alt="<?php htmlspecialchars($proj['projetTitre']); ?>">
-          <?php echo $proj['projetTexte']; ?>
 
-          <?php
-          if(!empty($proj['projetGithub'])) {
-          ?>
-            <br>
+        <div class="mb-5">
+          <img style="max-height:100px;" class="img-fluid img-thumbnail float-left mr-3" src="view/<?php echo htmlspecialchars($proj['projetImage']); ?>" alt="<?php htmlspecialchars($proj['projetTitre']); ?>">
+            <?php echo $proj['projetTexte']; ?>
+
+            <?php
+            if(!empty($proj['projetGithub'])) {
+            ?>
+
             <a class="text-dark" href="<?php echo htmlspecialchars($proj['projetGithub']); ?>" target="_blank"><i class="fab fa-github fa-2x"></i> <?php echo htmlspecialchars($proj['projetGithub']); ?></a>
-          <?php
-          }
-          ?>
-
+            <?php
+            }
+            ?>
+        </div>
+<hr>
 
 <div id="disqus_thread"></div>
 <script>

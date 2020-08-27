@@ -6,7 +6,7 @@ function index() {
     $projs = getProjets();
     $arts = getArticles();
     $apropos = getApropos();
-    $projArchDate = getProjetArchivesDate();
+    $getarch = getArchives();
     require('./view/indexView.php');
 }
 
@@ -30,8 +30,11 @@ function article() {
   }
 }
 
-function ProjetArchivesDate() {
-  require('./view/archivesView.php');
+function archive() {
+  if (isset($_GET['month']) && isset($_GET['year']) && !empty($_GET['month']) && !empty($_GET['year'])) {
+    $arch = getArchive($_GET['month'],$_GET['year']);
+    require('./view/archivesView.php');
+  }
 }
 
 function contact() {

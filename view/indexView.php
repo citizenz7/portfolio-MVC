@@ -234,7 +234,7 @@ ob_start();
 		        <option selected>Mois - années</option>
 		        <?php
 		        // $stmt = $db->query("SELECT Month(projetDate) as Month, Year(projetDate) as Year FROM projets GROUP BY Month(projetDate), Year(projetDate) ORDER BY projetDate DESC");
-		        while($row = $projArchDate->fetch()){
+		        while($row = $getarch->fetch()){
 			           $monthName = date_fr("F", mktime(0, 0, 0, html($row['Month']), 10));
 			           $year = date_fr(html($row['Year']));
 			           echo "<option value='index.php?action=archive&month=" . html($row['Month']) . "&year=" . html($row['Year']) . "'>" . html($monthName) . "-" . html($row['Year']) . "</option>";

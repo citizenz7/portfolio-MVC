@@ -29,10 +29,12 @@ ob_start();
             <i class="fas fa-eye"></i> Lectures : <?php echo htmlspecialchars($art['articleVues']); ?>
           </p>
         </div>
-        <img class="img-fluid img-thumbnail float-left img-article" src="view/<?php echo htmlspecialchars($art['articleImage']); ?>" alt="<?php htmlspecialchars($art['articleTitre']); ?>">
+        <div class="mb-5">
+          <img class="img-fluid img-thumbnail float-left img-article" src="view/<?php echo htmlspecialchars($art['articleImage']); ?>" alt="<?php htmlspecialchars($art['articleTitre']); ?>">
           <?php echo $art['articleTexte']; ?>
+        </div>
 
-
+<hr>
 <div id="disqus_thread"></div>
 <script>
 

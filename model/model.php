@@ -2,14 +2,14 @@
 
 function getProjets() {
    $db = dbConnect();
-   $req = $db->query('SELECT * FROM projets ORDER BY projetID DESC');
+   $req = $db->query("SELECT * FROM projets ORDER BY projetID DESC");
 
    return $req;
 }
 
 function getProjet($projetId) {
     $db = dbConnect();
-    $req = $db->prepare('SELECT projetID, projetTitre, projetCat, projetTexte, projetGithub, projetDate, projetImage, projetVues FROM projets WHERE projetID = ?');
+    $req = $db->prepare("SELECT projetID, projetTitre, projetCat, projetTexte, projetGithub, projetDate, projetImage, projetVues FROM projets WHERE projetID = ?");
     $req->execute(array($projetId));
     $proj = $req->fetch();
 
@@ -18,14 +18,14 @@ function getProjet($projetId) {
 
 function getArticles() {
    $db = dbConnect();
-   $arts = $db->query('SELECT * FROM articles ORDER BY articleID DESC');
+   $arts = $db->query("SELECT * FROM articles ORDER BY articleID DESC");
 
    return $arts;
 }
 
 function getArticle($articleId) {
     $db = dbConnect();
-    $req = $db->prepare('SELECT articleID, articleTitre, articleTexte, articleDate, articleImage, articleVues FROM articles WHERE articleID = ?');
+    $req = $db->prepare("SELECT articleID, articleTitre, articleTexte, articleDate, articleImage, articleVues FROM articles WHERE articleID = ?");
     $req->execute(array($articleId));
     $art = $req->fetch();
 
@@ -34,16 +34,37 @@ function getArticle($articleId) {
 
 function getApropos() {
     $db = dbConnect();
-    $apropos = $db->query('SELECT username, apropos FROM membres WHERE memberID = 1');
+    $apropos = $db->query("SELECT username, apropos FROM membres WHERE memberID = 1");
 
     return $apropos;
 }
 
-function getProjetArchivesDate() {
+function getArchives() {
   $db = dbConnect();
-  $projArchDate = $db->query("SELECT Month(projetDate) as Month, Year(projetDate) as Year FROM projets GROUP BY Month(projetDate), Year(projetDate) ORDER BY projetDate DESC");
+  $getarch = $db->query("SELECT Month(projetDate) as Month, Year(projetDate) as Year FROM projets GROUP BY Month(projetDate), Year(projetDate) ORDER BY projetDate DESC");
 
-  return $projArchDate;
+  return $getarch;
+}
+
+function getArchive($from,$to) {
+  $month = $_GET['month'];
+  $year = $_GET['year'];
+
+  // $monthName = date_fr("F", mktime(0, 0, 0, html($_GET['month']), 10));
+  // $yearNumber = date_fr(html($_GET['year']));
+
+  //set from and to dates
+  $from = date_fr('Y-m-01 00:00:00', strtotime("$year-$month"));
+  $to = date_fr('Y-m-31 23:59:59', strtotime("$year-$month"));
+
+  $db = dbConnect();
+  $arch = $db->prepare("SELECT projetID, projetTitre, projetTexte, projetCat, projetDate FROM projets WHERE projetDate >= ? AND projetDate <= ? ORDER BY projetID DESC");
+  $arch->execute(array(
+    $from,
+    $to
+  ));
+
+  return $arch;
 }
 
 

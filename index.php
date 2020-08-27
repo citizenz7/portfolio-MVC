@@ -15,7 +15,7 @@ if (isset($_GET['action'])) {
       contact();
     }
     elseif ($_GET['action'] == 'archive') {
-      ProjetArchivesDate();
+      archive();
     }
 
     else {

@@ -69,7 +69,16 @@ function addProjetView() {
   require('./view/admin/addProjetAdminView.php');
 }
 
-function adminAddProjetBDD($projetTitre,$projetTexte,$projetCat) {
-  $addproj = addProjetBDD($projetTitre,$projetTexte,$projetCat);
+function adminAddProjetBDD($projetTitre,$projetTexte,$projetCat,$projetGithub) {
+  $addproj = addProjetBDD($projetTitre,$projetTexte,$projetCat,$projetGithub);
+  require('./view/admin/indexAdminView.php');
+}
+
+function addArticleView() {
+  require('./view/admin/addArticleAdminView.php');
+}
+
+function adminAddArticleBDD($articleTitre,$articleTexte) {
+  $addart = addArticleBDD($articleTitre,$articleTexte);
   require('./view/admin/indexAdminView.php');
 }

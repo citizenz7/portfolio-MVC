@@ -152,7 +152,7 @@ function getAdminIndexArticles() {
   return $adminArts;
 }
 
-function addProjetBDD($projetTitre,$projetTexte,$projetCat) {
+function addProjetBDD($projetTitre,$projetTexte,$projetCat,$projetGithub) {
     $db = dbConnect();
 
     if(isset($_POST['submit'])){
@@ -182,8 +182,8 @@ function addProjetBDD($projetTitre,$projetTexte,$projetCat) {
        }
 
       //insert into database
-      $addProjet = $db->prepare('INSERT INTO projets (projetTitre, projetTexte, projetCat, projetImage, projetDate, projetVues) VALUES (?, ?, ?, ?, ?, ?)') ;
-      $addProjet->execute(array($projetTitre,$projetTexte,$projetCat,$target,date('Y-m-d H:i:s'),'1'));
+      $addProjet = $db->prepare('INSERT INTO projets (projetTitre, projetTexte, projetCat, projetImage, projetGithub, projetDate, projetVues) VALUES (?, ?, ?, ?, ?, ?, ?)') ;
+      $addProjet->execute(array($projetTitre,$projetTexte,$projetCat,$target,$projetGithub,date('Y-m-d H:i:s'),'1'));
 
       //$projetID = $db->lastInsertId();
 
@@ -200,6 +200,54 @@ function addProjetBDD($projetTitre,$projetTexte,$projetCat) {
   }
 }
 
+
+function addArticleBDD($articleTitre,$articleTexte) {
+    $db = dbConnect();
+
+    if(isset($_POST['submit'])){
+
+      $target = "img/articles/" . $_FILES['articleImage']['name'];
+      $path = 'view/'.$target;
+
+      if(isset($_FILES['articleImage'])){
+         // find thevtype of image
+          switch ($_FILES["articleImage"]["type"]) {
+             case $_FILES["articleImage"]["type"] == "image/jpeg":
+                move_uploaded_file($_FILES["articleImage"]["tmp_name"], $path);
+                break;
+             case $_FILES["articleImage"]["type"] == "image/pjpeg":
+                move_uploaded_file($_FILES["articleImage"]["tmp_name"], $path);
+                break;
+             case $_FILES["articleImage"]["type"] == "image/png":
+                move_uploaded_file($_FILES["articleImage"]["tmp_name"], $path);
+                break;
+             case $_FILES["articleImage"]["type"] == "image/x-png":
+                move_uploaded_file($_FILES["articleImage"]["tmp_name"], $path);
+                break;
+
+             default:
+                $error[] = 'Mauvais type d\'image. Seules les JPG et les PNG sont acceptées !.';
+         }
+       }
+
+      //insert into database
+      $addArticle = $db->prepare('INSERT INTO articles (articleTitre, articleTexte, articleImage, articleDate, articleVues) VALUES (?, ?, ?, ?, ?)') ;
+      $addArticle->execute(array($articleTitre,$articleTexte,$target,date('Y-m-d H:i:s'),'1'));
+
+      //$projetID = $db->lastInsertId();
+
+
+    // if(isset($_FILES['projetImage']['name']) && !empty($_FILES['projetImage']['name'])) {
+    //     $addProjet = $db->prepare('INSERT INTO projets (projetImage) VALUES (?) WHERE projetID = LASTINSERTID()') ;
+    //     $addProjet->execute(array($target));
+    //
+    //     return $addProjet;
+    // }
+
+    return $addArticle;
+
+  }
+}
 
 
 function dbConnect() {

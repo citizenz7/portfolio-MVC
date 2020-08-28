@@ -29,9 +29,18 @@ if (isset($_GET['action'])) {
       addProjetView();
     }
     elseif($_GET['action'] == 'addProjetBDD') {
-      addProjetBDD($_POST['projetTitre'], $_POST['projetTexte'], $_POST['projetCat']);
+      addProjetBDD($_POST['projetTitre'], $_POST['projetTexte'], $_POST['projetCat'], $_POST['projetGithub']);
       //redirect to index page
       header('Location: index.php?action=adminIndex&actionP=added');
+      exit;
+    }
+    elseif($_GET['action'] == 'addArticleView') {
+      addArticleView();
+    }
+    elseif($_GET['action'] == 'addArticleBDD') {
+      addArticleBDD($_POST['articleTitre'], $_POST['articleTexte']);
+      //redirect to index page
+      header('Location: index.php?action=adminIndex&actionA=added');
       exit;
     }
     elseif($_GET['action'] == 'login') {

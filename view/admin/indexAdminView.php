@@ -34,26 +34,48 @@ ob_start();
 
 	  <?php
 	  if(isset($_GET['actionA']) && $_GET['actionA'] == "updated"){
-              echo '
-              <div class="alert alert-info alert-dismissible fade show text-center font-weight-bold mt-4" role="alert">
-                Article mis à jour !
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              ';
-            }
+      echo '
+        <div class="alert alert-info alert-dismissible fade show text-center font-weight-bold mt-4" role="alert">
+          Article mis à jour !
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      ';
+    }
 
-          if(isset($_GET['actionP']) && $_GET['actionP'] == "updated"){
-              echo '
-              <div class="alert alert-info alert-dismissible fade show text-center font-weight-bold mt-4" role="alert">
-                Projet mis à jour !
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              ';
-            }
+    if(isset($_GET['actionP']) && $_GET['actionP'] == "updated"){
+      echo '
+        <div class="alert alert-info alert-dismissible fade show text-center font-weight-bold mt-4" role="alert">
+          Projet mis à jour !
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      ';
+    }
+
+    if(isset($_GET['actionP']) && $_GET['actionP'] == "added"){
+      echo '
+        <div class="alert alert-success alert-dismissible fade show text-center font-weight-bold mt-4" role="alert">
+          Projet ajouté !
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      ';
+    }
+
+    if(isset($_GET['actionA']) && $_GET['actionA'] == "added"){
+      echo '
+        <div class="alert alert-success alert-dismissible fade show text-center font-weight-bold mt-4" role="alert">
+          Article ajouté !
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      ';
+    }
 	  ?>
 
 
@@ -154,7 +176,7 @@ ob_start();
           <table class="table table-responsive-sm">
             <tr>
               <td><span id="articles" class="lead font-weight-bold">Articles</span></td>
-              <td class="text-right"><a href="add-article.php" class="mx-auto"><button type="button" class="btn btn-success btn-sm">Ajouter un article</button></a></td>
+              <td class="text-right"><a href="index.php?action=addArticleView" class="mx-auto"><button type="button" class="btn btn-success btn-sm">Ajouter un article</button></a></td>
             </tr>
           </table>
 

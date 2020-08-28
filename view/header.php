@@ -52,9 +52,9 @@
       <p><a class="text-decoration-none text-white" href="index.php#projets">< Projets /></a></p>
       <p><a class="text-decoration-none text-white" href="index.php#articles">< Articles /></a></p>
       <p><a class="text-decoration-none text-white" href="index.php#apropos">< A propos /></a></p>
-      <p><a class="text-decoration-none text-white" href="contact.php">< Contact /></a></p>
+      <p><a class="text-decoration-none text-white" href="index.php?action=contact">< Contact /></a></p>
       <p><a class="text-decoration-none text-white" href="index.php#archives">< Archives /></a></p>
-      <p><a class="text-decoration-none text-white" href="recherche.php">< Recherche /></a></p>
+      <p><a class="text-decoration-none text-white" href="index.php?action=recherche">< Recherche /></a></p>
     </div>
     <div class="menu__toggler"><span></span></div>
     <script >

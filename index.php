@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require('controller/controller.php');
 
 if (isset($_GET['action'])) {
@@ -16,6 +18,12 @@ if (isset($_GET['action'])) {
     }
     elseif ($_GET['action'] == 'archive') {
       archive();
+    }
+    elseif ($_GET['action'] == 'recherche') {
+      recherche();
+    }
+    elseif($_GET['action'] == 'adminIndex') {
+      adminIndex();
     }
 
     else {

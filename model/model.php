@@ -67,6 +67,91 @@ function getArchive($from,$to) {
   return $arch;
 }
 
+function getRecherche() {
+  if(isset($_POST['requete']) && $_POST['requete'] != NULL) {
+    $db = dbConnect();
+    $requete = html($_POST['requete']);
+    $rech = $db->prepare('SELECT * FROM projets WHERE projetTitre LIKE :requete OR projetTexte LIKE :requete ORDER BY projetDate DESC');
+    $rech->execute(array(':requete' => '%'.$requete.'%'));
+
+    return $rech;
+  }
+}
+
+function getCat() {
+  $db = dbConnect();
+
+  if(isset($_GET['cat'])) {
+
+      $cat = html($_GET['cat']);
+
+      // Tri des projets par catégorie
+      if (!empty($cat) && !in_array($cat, array('HTML-CSS','PHP-SQL','JS'))) {
+         header('Location: index.php');
+         exit();
+      }
+
+      //on collecte tous les enregistrements de la fonction
+      $stmt = $db->query('SELECT projetID FROM projets WHERE projetCat="'.$cat.'"');
+
+      //On détermine le nombre total d'enregistrements
+      //$pages->set_total($stmt->rowCount());
+
+      if($cat == "HTML-CSS") {
+        $stmt = $db->query('SELECT * FROM projets WHERE projetCat="'.$cat.'"');
+      }
+      elseif($cat == "PHP-SQL") {
+        $stmt = $db->query('SELECT * FROM projets WHERE projetCat="'.$cat.'"');
+      }
+      elseif($cat == "JS") {
+        $stmt = $db->query('SELECT * FROM projets WHERE projetCat="'.$cat.'"');
+      }
+    }
+
+    else {
+        //on collecte tous les enregistrements de la fonction
+        $stmt = $db->query('SELECT projetID FROM projets');
+
+        //On détermine le nombre total d'enregistrements
+        //$pages->set_total($stmt->rowCount());
+
+        $stmt = $db->query('SELECT * FROM projets ORDER BY projetID DESC');
+    }
+
+    return $stmt;
+}
+
+
+function getAdminIndexProjets() {
+  $db = dbConnect();
+
+  //Pagination : on instancie la class
+  $pages = new Paginator('5','proj');
+  //on collecte tous les enregistrements de la fonction
+  $stmt = $db->query('SELECT projetID FROM projets');
+  //On détermine le nombre total d'enregistrements
+  $pages->set_total($stmt->rowCount());
+
+  $adminProjs = $db->query('SELECT projetID, projetTitre, projetDate FROM projets ORDER BY projetID DESC ' .$pages->get_limit());
+
+  return $adminProjs;
+}
+
+function getAdminIndexArticles() {
+  $db = dbConnect();
+
+  //Pagination : on instancie la class
+  $pages = new Paginator('5','art');
+  //on collecte tous les enregistrements de la fonction
+  $stmt = $db->query('SELECT articleID FROM articles');
+  //On détermine le nombre total d'enregistrements
+  $pages->set_total($stmt->rowCount());
+
+  $adminArts = $db->query('SELECT articleID, articleTitre, articleDate FROM articles ORDER BY articleID DESC ' .$pages->get_limit());
+
+  return $adminArts;
+}
+
 
 function dbConnect() {
     try {
@@ -82,9 +167,6 @@ function html($string) {
     //return htmlspecialchars($string, REPLACE_FLAGS, CHARSET);
     return htmlspecialchars($string, ENT_COMPAT, 'UTF-8', true);
 }
-
-
-
 
 
 //-----------------------------------------------------
@@ -120,21 +202,23 @@ define('SMTPPORT','587');
 //FUNCTIONS
 //-----------------------------------------------------
 //load classes as needed
-// function my_autoloader($class) {
-//
-//    $class = strtolower($class);
-//
-//    //if call from within assets adjust the path
-//    $classpath = './view/classes/class.'.$class . '.php';
-//    if (file_exists($classpath)) {
-//       require_once $classpath;
-//    }
-//
-// }
-//
-// spl_autoload_register('my_autoloader');
-//
-// $user = new User($db);
+function my_autoloader($class) {
+
+   $class = strtolower($class);
+
+   //if call from within assets adjust the path
+   $classpath = 'view/classes/class.'.$class . '.php';
+   if (file_exists($classpath)) {
+      require_once $classpath;
+   }
+
+}
+
+spl_autoload_register('my_autoloader');
+
+$db = dbConnect();
+
+$user = new User($db);
 
 
 // ---------------------------------------------------------------------

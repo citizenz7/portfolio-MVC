@@ -23,7 +23,7 @@
       <div class="pt-5">
         <a href="#tothetop" class="text-white" title="Haut de page"><i class="fas fa-chevron-up fa-3x text-white"></i><br>Top</a>
         <br>
-        <a class="text-white" href="admin/">Admin</a>
+        <a class="text-white" href="index.php?action=adminIndex">Admin</a>
       </div>
 
     </div>

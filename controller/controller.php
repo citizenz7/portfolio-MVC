@@ -7,6 +7,7 @@ function index() {
     $arts = getArticles();
     $apropos = getApropos();
     $getarch = getArchives();
+    $cat = getCat();
     require('./view/indexView.php');
 }
 
@@ -37,6 +38,21 @@ function archive() {
   }
 }
 
+function recherche() {
+  $rech = getRecherche();
+  require('./view/rechercheView.php');
+}
+
 function contact() {
   require('./view/contactView.php');
+}
+
+function rechercher() {
+  require('./view/rechercheView.php');
+}
+
+function adminIndex() {
+  $adminProjs = getAdminIndexProjets();
+  $adminArts = getAdminIndexArticles();
+  require('./view/admin/indexAdminView.php');
 }

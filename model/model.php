@@ -152,6 +152,55 @@ function getAdminIndexArticles() {
   return $adminArts;
 }
 
+function addProjetBDD($projetTitre,$projetTexte,$projetCat) {
+    $db = dbConnect();
+
+    if(isset($_POST['submit'])){
+
+      $target = "img/projets/" . $_FILES['projetImage']['name'];
+      $path = 'view/'.$target;
+
+      if(isset($_FILES['projetImage'])){
+         // find thevtype of image
+          switch ($_FILES["projetImage"]["type"]) {
+             case $_FILES["projetImage"]["type"] == "image/jpeg":
+                move_uploaded_file($_FILES["projetImage"]["tmp_name"], $path);
+                break;
+             case $_FILES["projetImage"]["type"] == "image/pjpeg":
+                move_uploaded_file($_FILES["projetImage"]["tmp_name"], $path);
+                break;
+             case $_FILES["projetImage"]["type"] == "image/png":
+                move_uploaded_file($_FILES["projetImage"]["tmp_name"], $path);
+                break;
+             case $_FILES["projetImage"]["type"] == "image/x-png":
+                move_uploaded_file($_FILES["projetImage"]["tmp_name"], $path);
+                break;
+
+             default:
+                $error[] = 'Mauvais type d\'image. Seules les JPG et les PNG sont acceptées !.';
+         }
+       }
+
+      //insert into database
+      $addProjet = $db->prepare('INSERT INTO projets (projetTitre, projetTexte, projetCat, projetImage, projetDate, projetVues) VALUES (?, ?, ?, ?, ?, ?)') ;
+      $addProjet->execute(array($projetTitre,$projetTexte,$projetCat,$target,date('Y-m-d H:i:s'),'1'));
+
+      //$projetID = $db->lastInsertId();
+
+
+    // if(isset($_FILES['projetImage']['name']) && !empty($_FILES['projetImage']['name'])) {
+    //     $addProjet = $db->prepare('INSERT INTO projets (projetImage) VALUES (?) WHERE projetID = LASTINSERTID()') ;
+    //     $addProjet->execute(array($target));
+    //
+    //     return $addProjet;
+    // }
+
+    return $addProjet;
+
+  }
+}
+
+
 
 function dbConnect() {
     try {

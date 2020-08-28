@@ -30,7 +30,7 @@ ob_start();
     <div class="row">
       <div class="col-sm-12 px-5 text-justify">
         <div class="pb-2">
-          <div class="text-center mb-4 alert alert-primary" role="alert">Bienvenue <b><?php echo $_SESSION['username']; ?></b> ! Vous êtes connecté.</div>
+          <div class="text-center mb-4 alert alert-primary" role="alert">Bienvenue <b><?php echo $_SESSION['username']; ?></b> ! Vous êtes connecté. <a href="index.php?action=deconnexion">Déconnexion</a></div>
 
 	  <?php
 	  if(isset($_GET['actionA']) && $_GET['actionA'] == "updated"){
@@ -63,7 +63,7 @@ ob_start();
             <table class="table table-responsive-sm">
               <tr>
                 <td><span id="projets" class="lead font-weight-bold">Projets</span></td>
-                <td class="text-right"><a href="add-projet.php" class="mx-auto"><button type="button" class="btn btn-success btn-sm">Ajouter un projet</button></a></td>
+                <td class="text-right"><a href="index.php?action=addProjetView" class="mx-auto"><button type="button" class="btn btn-success btn-sm">Ajouter un projet</button></a></td>
               </tr>
             </table>
 

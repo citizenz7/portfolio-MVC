@@ -51,8 +51,25 @@ function rechercher() {
   require('./view/rechercheView.php');
 }
 
+function login() {
+  require('./view/admin/loginAdminView.php');
+}
+
+function deconnexion() {
+  require('./view/admin/logoutAdminView.php');
+}
+
 function adminIndex() {
   $adminProjs = getAdminIndexProjets();
   $adminArts = getAdminIndexArticles();
+  require('./view/admin/indexAdminView.php');
+}
+
+function addProjetView() {
+  require('./view/admin/addProjetAdminView.php');
+}
+
+function adminAddProjetBDD($projetTitre,$projetTexte,$projetCat) {
+  $addproj = addProjetBDD($projetTitre,$projetTexte,$projetCat);
   require('./view/admin/indexAdminView.php');
 }

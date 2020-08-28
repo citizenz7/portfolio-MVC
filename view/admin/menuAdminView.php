@@ -21,6 +21,6 @@
 	else {
 		echo '<span class="navbar-text"><a class="text-white" href="logout.php"><i class="fas fa-sign-out-alt"></i> Déconnexion</a></span>';
 	}
-	?> 
+	?>
   </div>
 </nav>

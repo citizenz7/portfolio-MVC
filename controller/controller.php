@@ -52,16 +52,22 @@ function rechercher() {
 }
 
 function login() {
+  $db = dbConnect();
+  $user = new User($db);
   require('./view/admin/loginAdminView.php');
 }
 
 function deconnexion() {
+  $db = dbConnect();
+  $user = new User($db);
   require('./view/admin/logoutAdminView.php');
 }
 
 function adminIndex() {
   $adminProjs = getAdminIndexProjets();
   $adminArts = getAdminIndexArticles();
+  $db = dbConnect();
+  $user = new User($db);
   require('./view/admin/indexAdminView.php');
 }
 
@@ -81,4 +87,21 @@ function addArticleView() {
 function adminAddArticleBDD($articleTitre,$articleTexte) {
   $addart = addArticleBDD($articleTitre,$articleTexte);
   require('./view/admin/indexAdminView.php');
+}
+
+function editProjetView() {
+  require('./view/admin/editProjetAdminView.php');
+}
+
+function adminEditProjetBDD($projetTitre,$projetTexte,$projetCat,$projetGithub) {
+  $editProjet = editProjetBDD($projetTitre,$projetTexte,$projetCat,$projetGithub);
+  require('./view/admin/indexAdminView.php');
+}
+
+function adminEditDelImage() {
+
+}
+
+function adminEditProjetForm() {
+
 }

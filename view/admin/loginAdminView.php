@@ -3,7 +3,7 @@ ob_start();
 
 //if not logged in redirect to login page
 if($user->is_logged_in()){
-  header('Location: index.php');
+  header('Location: index.php?action=adminIndex');
 }
 ?>
 
@@ -44,7 +44,7 @@ if(isset($_POST['submit'])){
     if($user->login($username,$password)){
 
         //logged in return to index page
-        header('Location: index.php');
+        header('Location: index.php?action=adminIndex');
         exit;
 
     } else {

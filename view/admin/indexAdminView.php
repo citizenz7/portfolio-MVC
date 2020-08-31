@@ -78,9 +78,7 @@ ob_start();
     }
 	  ?>
 
-
-
-          <?php //include('menuAdminView.php');?>
+          <?php include('menuAdminView.php');?>
 
             <table class="table table-responsive-sm">
               <tr>
@@ -118,7 +116,7 @@ ob_start();
                   echo '<td class="small">'.date_fr('d-m-Y à H:i:s', strtotime(($row['projetDate']))).'</td>';
                   ?>
                   <td class="text-center">
-                    <a class="btn btn-primary btn-sm tinytext" role="button" aria-pressed="true" title="Editer le projets" href="edit-projet.php?id=<?php echo $row['projetID'];?>">Editer</a> |
+                    <a class="btn btn-primary btn-sm tinytext" role="button" aria-pressed="true" title="Editer le projets" href="index.php?action=editProjetView&id=<?php echo $row['projetID'];?>">Editer</a> |
                     <a class="btn btn-danger btn-sm tinytext" role="button" aria-pressed="true" title="Supprimer le projet" href="javascript:delprojet('<?php echo $row['projetID'];?>','<?php echo $row['projetTitre'];?>')">Suppr.</a>
                   </td>
                   <?php

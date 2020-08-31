@@ -34,6 +34,15 @@ if (isset($_GET['action'])) {
       header('Location: index.php?action=adminIndex&actionP=added');
       exit;
     }
+    elseif($_GET['action'] == 'editProjetView') {
+      editProjetView();
+    }
+    elseif($_GET['action'] == 'editProjetBDD') {
+      editProjetBDD($_POST['projetTitre'], $_POST['projetTexte'], $_POST['projetCat'], $_POST['projetGithub']);
+      //redirect to index page
+      header('Location: index.php?action=adminIndex&actionP=edited');
+      exit;
+    }
     elseif($_GET['action'] == 'addArticleView') {
       addArticleView();
     }
@@ -43,7 +52,7 @@ if (isset($_GET['action'])) {
       header('Location: index.php?action=adminIndex&actionA=added');
       exit;
     }
-    elseif($_GET['action'] == 'login') {
+    elseif($_GET['action'] == 'adminLogin') {
       login();
     }
     elseif($_GET['action'] == 'deconnexion') {

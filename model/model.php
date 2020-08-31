@@ -187,19 +187,85 @@ function addProjetBDD($projetTitre,$projetTexte,$projetCat,$projetGithub) {
 
       //$projetID = $db->lastInsertId();
 
+      // if(isset($_FILES['projetImage']['name']) && !empty($_FILES['projetImage']['name'])) {
+      //     $addProjet = $db->prepare('INSERT INTO projets (projetImage) VALUES (?) WHERE projetID = LASTINSERTID()') ;
+      //     $addProjet->execute(array($target));
+      //
+      //     return $addProjet;
+      // }
 
-    // if(isset($_FILES['projetImage']['name']) && !empty($_FILES['projetImage']['name'])) {
-    //     $addProjet = $db->prepare('INSERT INTO projets (projetImage) VALUES (?) WHERE projetID = LASTINSERTID()') ;
-    //     $addProjet->execute(array($target));
-    //
-    //     return $addProjet;
-    // }
-
-    return $addProjet;
+      return $addProjet;
 
   }
 }
 
+function editProjetBDD($projetTitre,$projetTexte,$projetCat,$projetGithub) {
+    $db = dbConnect();
+
+    if(isset($_POST['submit'])){
+
+      $target = "img/articles/" . $_FILES['projetImage']['name'];
+      $path = '../'.$target;
+
+      if(isset($_FILES['projetImage'])){
+         // find thevtype of image
+          switch ($_FILES["projetImage"]["type"]) {
+             case $_FILES["projetImage"]["type"] == "image/jpeg":
+                move_uploaded_file($_FILES["projetImage"]["tmp_name"], $path);
+                break;
+             case $_FILES["projetImage"]["type"] == "image/pjpeg":
+                move_uploaded_file($_FILES["projetImage"]["tmp_name"], $path);
+                break;
+             case $_FILES["projetImage"]["type"] == "image/png":
+                move_uploaded_file($_FILES["projetImage"]["tmp_name"], $path);
+                break;
+             case $_FILES["projetImage"]["type"] == "image/x-png":
+                move_uploaded_file($_FILES["projetImage"]["tmp_name"], $path);
+                break;
+
+             default:
+                $error[] = 'Mauvais type d\'image. Seules les JPG et les PNG sont acceptées !.';
+         }
+       }
+
+      //insert into database
+      $editProjet = $db->prepare('UPDATE projets SET projetTitre = ?, projetTexte = ?, projetCat = ?, projetImage = ?, projetGithub = ?, projetDate = ?, projetVues = ? WHERE projetID = ?');
+      $editProjet->execute(array($projetTitre, $projetTexte, $projetCat, $projetImage, $projetGithub, date('Y-m-d H:i:s'), '1', $projetID));
+
+      return $editProjet;
+    }
+}
+
+function editDelimageREP($delimage) {
+    //Suppression de l'image du projet dans le répertoire img/
+    if(isset($_GET['delimageProj'])) {
+			$delimage = $_GET['delimageProj'];
+			//on supprime le fichier image
+			$stmt = $db->prepare('SELECT projetImage FROM projets WHERE projetID = ?');
+			$stmt->execute(array($delimage));
+			$sup = $stmt->fetch();
+
+			$file = "view/" . $sup['projetImage'];
+			if (file_exists($file)) {
+				unlink($file);
+			}
+
+			//Suppression de l'image dans la BDD
+			$supImageProj = $db->prepare('UPDATE projets SET projetImage = NULL WHERE projetID = ?');
+			$supImageProj->execute(array($delimage));
+			//header('Location: edit-projet.php?id='.$delimage);
+
+      return $supImageProj;
+		}
+}
+
+function editProjetForm() {
+   			$stmt = $db->prepare('SELECT projetID, projetTitre, projetTexte, projetCat, projetImage FROM projets WHERE projetID = ?') ;
+   			$stmt->execute(array($_GET['id']));
+   			$row = $stmt->fetch();
+
+        return $row;
+}
 
 function addArticleBDD($articleTitre,$articleTexte) {
     $db = dbConnect();
@@ -313,9 +379,9 @@ function my_autoloader($class) {
 
 spl_autoload_register('my_autoloader');
 
-$db = dbConnect();
-
-$user = new User($db);
+// $db = dbConnect();
+//
+// $user = new User($db);
 
 
 // ---------------------------------------------------------------------

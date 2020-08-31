@@ -95,7 +95,7 @@ function getCat() {
       $stmt = $db->query('SELECT projetID FROM projets WHERE projetCat="'.$cat.'"');
 
       //On détermine le nombre total d'enregistrements
-      //$pages->set_total($stmt->rowCount());
+      $pages->set_total($stmt->rowCount());
 
       if($cat == "HTML-CSS") {
         $stmt = $db->query('SELECT * FROM projets WHERE projetCat="'.$cat.'"');
@@ -126,13 +126,15 @@ function getAdminIndexProjets() {
   $db = dbConnect();
 
   //Pagination : on instancie la class
-  $pages = new Paginator('5','proj');
-  //on collecte tous les enregistrements de la fonction
-  $stmt = $db->query('SELECT projetID FROM projets');
-  //On détermine le nombre total d'enregistrements
-  $pages->set_total($stmt->rowCount());
+  //$pages = new Paginator('5','proj');
 
-  $adminProjs = $db->query('SELECT projetID, projetTitre, projetDate FROM projets ORDER BY projetID DESC ' .$pages->get_limit());
+  //on collecte tous les enregistrements de la fonction
+  //$stmt = $db->query('SELECT projetID FROM projets');
+
+  //On détermine le nombre total d'enregistrements
+  //$pages->set_total($stmt->rowCount());
+
+  //$adminProjs = $db->query('SELECT projetID, projetTitre, projetDate FROM projets ORDER BY projetID DESC ' .$pages->get_limit());
 
   return $adminProjs;
 }
@@ -141,13 +143,15 @@ function getAdminIndexArticles() {
   $db = dbConnect();
 
   //Pagination : on instancie la class
-  $pages = new Paginator('5','art');
-  //on collecte tous les enregistrements de la fonction
-  $stmt = $db->query('SELECT articleID FROM articles');
-  //On détermine le nombre total d'enregistrements
-  $pages->set_total($stmt->rowCount());
+  //$pages = new Paginator('5','art');
 
-  $adminArts = $db->query('SELECT articleID, articleTitre, articleDate FROM articles ORDER BY articleID DESC ' .$pages->get_limit());
+  //on collecte tous les enregistrements de la fonction
+  //$stmt = $db->query('SELECT articleID FROM articles');
+
+  //On détermine le nombre total d'enregistrements
+  //$pages->set_total($stmt->rowCount());
+
+  //$adminArts = $db->query('SELECT articleID, articleTitre, articleDate FROM articles ORDER BY articleID DESC ' .$pages->get_limit());
 
   return $adminArts;
 }

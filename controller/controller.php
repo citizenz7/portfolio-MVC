@@ -64,10 +64,21 @@ function deconnexion() {
 }
 
 function adminIndex() {
-  $adminProjs = getAdminIndexProjets();
-  $adminArts = getAdminIndexArticles();
+  // $adminProjs = getAdminIndexProjets();
+  // $adminArts = getAdminIndexArticles();
   $db = dbConnect();
   $user = new User($db);
+
+  $pagesProjets = new Paginator('5','proj');
+    $stmt = $db->query('SELECT projetID FROM projets');
+    $pagesProjets->set_total($stmt->rowCount());
+    $adminProjs = $db->query('SELECT projetID, projetTitre, projetDate FROM projets ORDER BY projetID DESC ' .$pagesProjets->get_limit());
+
+  $pagesArticles = new Paginator('5','art');
+      $stmt = $db->query('SELECT articleID FROM articles');
+      $pagesArticles->set_total($stmt->rowCount());
+      $adminArts = $db->query('SELECT articleID, articleTitre, articleDate FROM articles ORDER BY articleID DESC ' .$pagesArticles->get_limit());
+
   require('./view/admin/indexAdminView.php');
 }
 

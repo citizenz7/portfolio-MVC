@@ -155,11 +155,11 @@ ob_start();
 
       </div>
       <!-- Pagination -->
-      <!-- <div class="row justify-content-center">
+      <div class="row justify-content-center">
         <div class="col-4">
-          <?php //echo $pages->page_links(); ?>
+          <?php echo $pagesProjets->page_links('index.php?action=adminIndex&'); ?>
         </div>
-      </div> -->
+      </div>
     </div>
   </div>
 </div>
@@ -249,12 +249,12 @@ ob_start();
 
     <div class="row justify-content-center">
       <div class="col-4 pb-5 mb-5">
-        <?php //echo $pages->page_links(); ?>
+        <?php echo $pagesArticles->page_links('index.php?action=adminIndex&'); ?>
       </div>
     </div>
   </div>
 </div>
-</div> -->
+</div>
 
 
 <?php

@@ -127,6 +127,7 @@ class Paginator{
                 $ancre = "#articles";
             }
 
+
 	    $pagination = "";
 		if($lastpage > 1)
 		{

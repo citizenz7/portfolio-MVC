@@ -339,19 +339,19 @@ function html($string) {
 //-----------------------------------------------------
 //Paramètres du site
 //-----------------------------------------------------
-define('SITENAME','Portfolio');
-define('SITENAMELONG','Portfolio d\'Olivier Prieur');
-//define('WEBPATH','/var/www/'.SITENAMELONG.'/web/'); //Chemin complet pour les fichiers du site
-define('SITESLOGAN','Je suis un dev...');
-define('SITEDESCRIPTION','Portfolio d\'Olivier Prieur');
-define('SITEKEYWORDS','Nevers,'.SITENAME.',libre,free,opensource,gnu,téléchargement,download,upload,xbt,tracker,php,mysql,linux,bsd,os,système,system,exploitation,debian,arch,fedora,ubuntu,manjaro,mint,film,movie,picture,video,mp3,musique,music,mkv,avi,mpeg,gpl,creativecommons,cc,mit,apache,cecill,artlibre');
-//define('SITEURL','http://www.'.SITENAMELONG);
-//define('SITEURLHTTPS','https://www.'.SITENAMELONG);
-define('SITEOWNORNAME','Olivier Prieur');
-define('SITEAUTOR','citizenz7');
-define('SITEOWNORADDRESS','57 rue de Marzy 58000 Nevers');
-define('SITEVERSION','1.0.1');
-define('SITEDATE','10/07/20');
+define('SITENAME','xxxxxxxxxxxxxxxxxx');
+define('SITENAMELONG','xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
+define('WEBPATH','/var/www/'.SITENAMELONG.'/web/'); //Chemin complet pour les fichiers du site
+define('SITESLOGAN','xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
+define('SITEDESCRIPTION','xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
+define('SITEKEYWORDS','xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx');
+define('SITEURL','http://www.'.SITENAMELONG);
+define('SITEURLHTTPS','https://www.'.SITENAMELONG);
+define('SITEOWNORNAME','xxxxxxxxxxxxxxxxxxxx');
+define('SITEAUTOR','xxxxxxxxxxxxxxxx');
+define('SITEOWNORADDRESS','xxxxxxxxxxxxxxxxxxxxxxxxxx');
+define('SITEVERSION','1.0.0');
+define('SITEDATE','xx/xx/xx');
 define('COPYDATE','2020');
 define('CHARSET','UTF-8');
 
